@@ -5,6 +5,7 @@ public class Post {
     private String authorId;
     private String title;
     private String body;
+    private Author createdBy;
 
     public String getId() {
         return id;
@@ -36,5 +37,13 @@ public class Post {
 
     public void setBody(String body) {
         this.body = body;
+    }
+
+    public Author getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(Author createdBy) {
+        this.createdBy = createdBy;
     }
 }
