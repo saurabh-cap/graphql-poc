@@ -23,7 +23,7 @@ public class PostResolver implements GraphQLResolver<Post> {
     @Autowired
     private CommentRepository commentRepository;
 
-    public Author createdBy(Post post) {
+    public Author author(Post post) {
         LOGGER.error("post " + post.getTitle() + " authour" + post.getAuthorId());
         return authRepository.findOne(post.getAuthorId());
     }
@@ -31,5 +31,10 @@ public class PostResolver implements GraphQLResolver<Post> {
     public List<Comment> comments(Post post) {
         LOGGER.error("post resolver comments");
         return commentRepository.findByPostId(post.getId());
+    }
+
+    public List<Author> authors(Post post) {
+        LOGGER.error("post " + post.getTitle() + " author" + post.getAuthorId());
+        return authRepository.findAll();
     }
 }
