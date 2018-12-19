@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+
 @Component
 public class AuthorResolver implements GraphQLResolver<Author> {
     private static final Logger LOGGER = LoggerFactory.getLogger(AuthorResolver.class);
@@ -18,7 +19,7 @@ public class AuthorResolver implements GraphQLResolver<Author> {
     @Autowired
     private PostRepository postRepository;
 
-    public List<Post> posts(Author auth) {
+    public List<Post> getPosts(Author auth) {
         LOGGER.error("author resolver posts");
         return postRepository.findByAuthorId(auth.getId());
     }
