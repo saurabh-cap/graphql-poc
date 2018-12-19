@@ -13,20 +13,10 @@ public class PostRepository {
     }
 
     public List<Post> findAll() {
-        try {
-            throw new ClassNotFoundException("");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
         return Collections.emptyList();
     }
 
     public List<Post> findByAuthorId(String id) {
-        try {
-            throw new ClassNotFoundException("");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
         return Collections.emptyList();
     }
 
