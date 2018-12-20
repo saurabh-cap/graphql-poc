@@ -1,16 +1,18 @@
-package com.capillary.graphqlresolver.util;
+package com.capillary.graphqlresolver.util.impl;
 
 import com.capillary.graphqlresolver.models.Author;
 import com.capillary.graphqlresolver.models.Comment;
 import com.capillary.graphqlresolver.models.Post;
+import com.capillary.graphqlresolver.util.QueryBuilder;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
-public class GraphQLQueryBuilder {
+public class GraphQLQueryBuilder implements QueryBuilder {
 
     private static final List<Class> NESTABLE_CLASSES = Arrays.asList(Author.class, Comment.class, Post.class);
 
@@ -19,7 +21,11 @@ public class GraphQLQueryBuilder {
     private static final String TAB = "\t";
     private static final String CLOSE_CURLY_BRACE = "}";
 
-    public static <T> String build(Class<T> clazz) {
+    public <T> String build(String type, Class<T> clazz) {
+        return type + build(clazz);
+    }
+
+    private static <T> String build(Class<T> clazz) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(OPEN_CURLY_BRACE + NEW_LINE);
         Field[] fields = clazz.getDeclaredFields();
