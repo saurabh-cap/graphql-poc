@@ -7,7 +7,7 @@ public class Post {
     private String authorId;
     private String title;
     private String body;
-    private List<Author> authors;
+//    private List<Author> authors;
 
     public String getId() {
         return id;
@@ -41,11 +41,11 @@ public class Post {
         this.body = body;
     }
 
-    public List<Author> getAuthors() {
-        return authors;
-    }
+//    public List<Author> getAuthors() {
+//        return authors;
+//    }
 
-    public void setAuthors(List<Author> authors) {
-        this.authors = authors;
-    }
+//    public void setAuthors(List<Author> authors) {
+//        this.authors = authors;
+//    }
 }
