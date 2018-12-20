@@ -1,6 +1,5 @@
 package com.capillary.graphqlresolver.models;
 
-
 import java.util.List;
 
 public class Author {

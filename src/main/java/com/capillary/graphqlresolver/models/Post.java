@@ -1,13 +1,10 @@
 package com.capillary.graphqlresolver.models;
 
-import java.util.List;
-
 public class Post {
     private String id;
     private String authorId;
     private String title;
     private String body;
-//    private List<Author> authors;
 
     public String getId() {
         return id;
@@ -40,12 +37,4 @@ public class Post {
     public void setBody(String body) {
         this.body = body;
     }
-
-//    public List<Author> getAuthors() {
-//        return authors;
-//    }
-
-//    public void setAuthors(List<Author> authors) {
-//        this.authors = authors;
-//    }
 }
