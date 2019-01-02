@@ -21,7 +21,7 @@ public class Mutation implements GraphQLMutationResolver {
         return authRepo.save(new Author());
     }
 
-    public Author removeAuthour(String id) {
+    public Author removeAuthor(String id) {
         Author auth = authRepo.findOne(id);
         authRepo.delete(id);
         return auth;

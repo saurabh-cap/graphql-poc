@@ -27,10 +27,8 @@ type Query {
   allAuthors: [Author]
 }
 
-
-
 type Mutation {
   addAuthor(name: String!) : Author
-  removeAuthour(id: ID!): Author
+  removeAuthor(id: ID!): Author
   addPost(title: String!, body: String!, authorId: ID!): Post
 }
