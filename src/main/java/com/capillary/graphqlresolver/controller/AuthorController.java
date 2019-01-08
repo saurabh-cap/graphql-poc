@@ -1,5 +1,6 @@
 package com.capillary.graphqlresolver.controller;
 
+import com.capillary.graphqlresolver.datafetcher.AllAuthorsDataFetcher;
 import com.capillary.graphqlresolver.models.Author;
 import com.capillary.graphqlresolver.repository.AuthorRepository;
 import com.capillary.graphqlresolver.util.QueryBuilder;
@@ -7,7 +8,6 @@ import com.capillary.graphqlresolver.util.impl.GraphQLQueryBuilder;
 import graphql.ExecutionResult;
 import graphql.GraphQL;
 import graphql.schema.GraphQLSchema;
-import graphql.schema.StaticDataFetcher;
 import graphql.schema.idl.RuntimeWiring;
 import graphql.schema.idl.SchemaGenerator;
 import graphql.schema.idl.SchemaParser;
@@ -27,6 +27,9 @@ public class AuthorController {
     @Autowired
     private AuthorRepository authorRepository;
 
+    @Autowired
+    AllAuthorsDataFetcher allAuthorsDataFetcher;
+
     @RequestMapping(method = RequestMethod.GET)
     public String findAll() {
         QueryBuilder queryBuilder = new GraphQLQueryBuilder();
@@ -37,20 +40,21 @@ public class AuthorController {
     public String sampleQuery() {
         final File schemaFile = new File(getClass().getClassLoader().getResource("schema.graphqls").getFile());
 
-        // each registry is merged into the main registry
-        final TypeDefinitionRegistry typeRegistry = new TypeDefinitionRegistry();
-        final SchemaParser schemaParser = new SchemaParser();
-        typeRegistry.merge(schemaParser.parse(schemaFile));
 
         final RuntimeWiring runtimeWiring = newRuntimeWiring()
-                .type("Query", builder -> builder.dataFetcher("hello", new StaticDataFetcher("world")))
+                .type("Query", builder -> builder.dataFetcher("allAuthors", allAuthorsDataFetcher))
                 .build();
 
-        final SchemaGenerator schemaGenerator = new SchemaGenerator();
-        final GraphQLSchema graphQLSchema = schemaGenerator.makeExecutableSchema(typeRegistry, runtimeWiring);
+        final TypeDefinitionRegistry typeRegistry = new TypeDefinitionRegistry();
+        typeRegistry.merge(new SchemaParser().parse(schemaFile));
+        final GraphQLSchema graphQLSchema = new SchemaGenerator().makeExecutableSchema(typeRegistry, runtimeWiring);
 
         final GraphQL build = GraphQL.newGraphQL(graphQLSchema).build();
-        final ExecutionResult executionResult = build.execute("{hello}");
+        final ExecutionResult executionResult = build.execute("{" +
+                "  allAuthors{" +
+                "    id" +
+                "  }" +
+                "}");
 
         return executionResult.getData().toString();
     }

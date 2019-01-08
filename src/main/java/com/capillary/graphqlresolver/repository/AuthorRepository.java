@@ -9,7 +9,10 @@ import java.util.List;
 @Repository
 public class AuthorRepository {
     public Author findOne(String authorId) {
-        return null;
+        Author author1 = new Author();
+        author1.setId("1");
+        author1.setName("saurabh");
+        return author1;
     }
 
     public Author save(Author author) {
