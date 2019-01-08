@@ -17,13 +17,13 @@ public class Query implements GraphQLQueryResolver {
     private PostRepository postRepository;
 
     @Autowired
-    private AuthorRepository authRepo;
+    private AuthorRepository authorRepository;
 
     public List<Post> allPosts() {
         return postRepository.findAll();
     }
 
     public List<Author> allAuthors() {
-        return authRepo.findAll();
+        return authorRepository.findAll();
     }
 }
