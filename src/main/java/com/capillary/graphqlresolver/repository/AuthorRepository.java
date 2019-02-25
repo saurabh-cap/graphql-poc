@@ -27,6 +27,11 @@ public class AuthorRepository {
         Author author1=new Author();
         author1.setId("1");
         author1.setName("saurabh");
-        return Arrays.asList(author1);
+
+        Author author2=new Author();
+        author1.setId("2");
+        author1.setName("sharma");
+
+        return Arrays.asList(author1,author2);
     }
 }
